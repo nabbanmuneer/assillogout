@@ -38,9 +38,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs')
   })
-  app.get('/logout', checkNotAuthenticated, (req, res) => {
-    res.render('logout.ejs')
-  })
+
   
   app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
@@ -67,10 +65,10 @@ if (process.env.NODE_ENV !== 'production') {
     }
   })
   
-  app.delete('/logout', (req, res) => {
-    req.session.destroy(function (err) {
-        res.redirect('/login');
-       });
+  
+    app.delete('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/login')
     })
 
   
